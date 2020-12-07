@@ -1,6 +1,7 @@
 .vscode
 __pycache__
 data/*
+deepcovidnet/data/safegraph_open_census_data/
 *egg-info*
 runs
 *.ipynb
