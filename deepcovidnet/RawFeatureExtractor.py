@@ -181,13 +181,13 @@ class RawFeatureExtractor():
             # find FIPS and category of poi
             df['countyFIPS'] = df['safegraph_place_id'].apply(
                 lambda x: self.poi_info[x]['countyFIPS']
-                            if x in self.poi_info and self.poi_info[x]['countyFIPS'] 
+                            if x in self.poi_info and self.poi_info[x]['countyFIPS']
                             else '00000'
             )
 
             df['top_category'] = df['safegraph_place_id'].apply(
                 lambda x: self.poi_info[x]['top_category']
-                            if x in self.poi_info and self.poi_info[x]['top_category'] 
+                            if x in self.poi_info and self.poi_info[x]['top_category']
                             else 'Unknown'
             )
             logging.info('Finished getting categories')
@@ -234,7 +234,7 @@ class RawFeatureExtractor():
             output_dfs.append(main_df[cols].rename(columns=renamed_cols))
 
         return \
-            TimeDependentFeatures(output_dfs, 'sg_patterns_monthly', start_date, 
+            TimeDependentFeatures(output_dfs, 'sg_patterns_monthly', start_date,
                                   timedelta(days=1),
                                   feature_saver=saver_config.sg_patterns_monthly)
 
@@ -318,11 +318,17 @@ class RawFeatureExtractor():
                      'H5_Investment in vaccines',
                      'H6_Facial Coverings'], index_col='CountryName')
 
+            # Create new index col
+            df['FIPS'] = df['CountryCode'] + "_" + df['RegionCode'].astype(str)
+            df = df.set_index('FIPS')
+
+            # Use lowercase date so we ca
+            df.rename(columns={'Date': 'date'}, inplace=True)
 
             df = df.where(df.notnull(), None)
-            output_dfs.append(df.dropna())
-        return \
-        TimeDependentFeatures(output_dfs, 'jsi-OxCGRT',
+            output_dfs.append(df)
+
+        return TimeDependentFeatures(output_dfs, 'jsi-OxCGRT',
                               start_date, timedelta(days=1),
                               feature_saver=saver_config.jsi_OxCGRT)
 
