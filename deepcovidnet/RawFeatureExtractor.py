@@ -18,7 +18,8 @@ import pickle
 
 class RawFeatureExtractor():
     def __init__(self):
-        self.poi_info = self.get_poi_info()
+        pass
+        # self.poi_info = self.get_poi_info()
 
     def get_poi_info(self):
         if os.path.exists(config.poi_info_pickle_path):
@@ -283,6 +284,48 @@ class RawFeatureExtractor():
         return TimeDependentFeatures(dfs_per_day, 'weather_data',
                                      start_date, timedelta(1),
                                      feature_saver=saver_config.weather)
+
+
+    def read_jsi_OxCGRT(self, start_date, end_date):
+        output_dfs = []
+
+        files = config.jsi_OxCGRT_reader.get_files_between(start_date, end_date)
+
+        for csv_file, cur_date, _ in files:
+            df = pd.read_csv(csv_file,
+                 usecols=[
+                     'CountryName',
+                     'CountryCode',
+                     'RegionName',
+                     'RegionCode',
+                     'Date',
+                     'C1_School closing',
+                     'C2_Workplace closing',
+                     'C3_Cancel public events',
+                     'C4_Restrictions on gatherings',
+                     'C5_Close public transport',
+                     'C6_Stay at home requirements',
+                     'C7_Restrictions on internal movement',
+                     'C8_International travel controls',
+                     'E1_Income support',
+                     'E2_Debt/contract relief',
+                     'E3_Fiscal measures',
+                     'E4_International support',
+                     'H1_Public information campaigns',
+                     'H2_Testing policy',
+                     'H3_Contact tracing',
+                     'H4_Emergency investment in healthcare',
+                     'H5_Investment in vaccines',
+                     'H6_Facial Coverings'], index_col='CountryName')
+
+
+            df = df.where(df.notnull(), None)
+            output_dfs.append(df.dropna())
+        return \
+        TimeDependentFeatures(output_dfs, 'jsi-OxCGRT',
+                              start_date, timedelta(days=1),
+                              feature_saver=saver_config.jsi_OxCGRT)
+
 
     def read_sg_social_distancing(self, start_date, end_date):
         output_dfs = []

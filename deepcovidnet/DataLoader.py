@@ -49,6 +49,15 @@ class DataLoader(DataSaver):
         )
 
     @timed_logger_decorator
+    def load_jsi_OxCGRT(self, start_date, end_date):
+        return self._load_time_dep_features(
+            start_date, end_date, saver_config.jsi_OxCGRT.get_file_func(),
+            self.save_jsi_OxCGRT, TimeDependentFeatures,
+            'jsi_OxCGRT',
+            feature_saver=saver_config.jsi_OxCGRT
+        )
+
+    @timed_logger_decorator
     def load_weather_data(self, start_date, end_date):
         return self._load_time_dep_features(
             start_date, end_date, saver_config.weather.get_file_func(),

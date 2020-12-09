@@ -154,6 +154,12 @@ config.ri_csv_path = os.path.join(
                     )  # data internally generated - contact for availability
 
 # reader configs
+config.jsi_OxCGRT_reader = ReaderConfig(
+    file_granularity='daily',
+    file_path_format='jsi-OxCGRT/%Y/%m/%d/%Y-%m-%d-OxCGRT.csv',
+    is_timezone_variable=True
+)
+
 config.sg_social_distancing_reader = ReaderConfig(
                                     file_granularity='daily',
                                     file_path_format='social_distancing/%Y/%m/%d/%Y-%m-%d-social-distancing.csv',

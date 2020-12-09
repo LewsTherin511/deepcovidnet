@@ -6,17 +6,25 @@ from datetime import date, datetime
 
 config = Config('Global config parameters')
 
-data_base_dir = '/data'
-data_save_dir = '/saved_covid_data'
+# data_base_dir = '/data'
+# data_save_dir = '/saved_covid_data'
+data_base_dir = '/home/lews/PycharmProjects/covid_deepcovidnet/deepcovidnet/data'
+data_save_dir = '/home/lews/PycharmProjects/covid_deepcovidnet/deepcovidnet/saved_covid_data'
 
 config.set_static_val('data_base_dir', data_base_dir)
 config.set_static_val('data_save_dir', data_save_dir)
 
-config.data_start_date = date(2020, 4, 5)
-config.data_end_date = date(2020, 6, 29)
+# config.data_start_date = date(2020, 4, 5)
+# config.data_end_date = date(2020, 6, 29)
+#
+# config.train_end_date   = date(2020, 6, 2)
+# config.val_end_date     = date(2020, 6, 12)
 
-config.train_end_date   = date(2020, 6, 2)
-config.val_end_date     = date(2020, 6, 12)
+config.data_start_date = date(2020, 1, 1)
+config.data_end_date = date(2020, 9, 11)
+
+config.train_end_date   = date(2020, 7, 1)
+config.val_end_date     = date(2020, 8, 1)
 
 
 def get_best_tune_file(exp_name):

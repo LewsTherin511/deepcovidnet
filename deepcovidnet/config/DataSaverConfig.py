@@ -53,6 +53,12 @@ config.sg_patterns_monthly = FeatureSaver(
                                 keyword='monthly-patterns'
                             )
 
+#jsi_OxCGRT
+config.jsi_OxCGRT = FeatureSaver(
+    root='jsi_OxCGRT',
+    keyword='jsi_OxCGRT'
+)
+
 # social distancing data
 config.sg_social_distancing = FeatureSaver(
                                 root='social_distancing',

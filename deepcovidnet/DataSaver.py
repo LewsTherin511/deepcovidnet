@@ -26,6 +26,15 @@ class DataSaver(RawFeatureExtractor):
             overwrite
         )
 
+    def save_jsi_OxCGRT(self, start_date, end_date, overwrite=False):
+        self._save_time_dep_features(
+            start_date,
+            end_date,
+            self.read_jsi_OxCGRT,
+            config.jsi_OxCGRT,
+            overwrite
+        )
+
     def save_sg_social_distancing(self, start_date, end_date, overwrite=False):
         self._save_time_dep_features(
             start_date,

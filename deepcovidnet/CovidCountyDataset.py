@@ -39,16 +39,17 @@ class CovidCountyDataset(DataLoader, Dataset):
 				timedelta(hyperparams.past_days_to_consider)
 
 			features = [
-				self.load_census_data(),
-				self.load_pop_dens_ccvi(),
-				self.load_sg_patterns_monthly(training_data_start_date, training_data_end_date),
-				# self.read_weather_data(training_data_start_date, training_data_end_date),
-				self.load_sg_social_distancing(training_data_start_date, training_data_end_date),
-				self.load_num_cases(training_data_start_date, training_data_end_date),
-				self.load_dilation_index(training_data_start_date, training_data_end_date),
-				self.load_reproduction_number(training_data_start_date, training_data_end_date),
-				self.load_sg_mobility_incoming(training_data_start_date, training_data_end_date),
-				self.load_countywise_cumulative_cases(training_data_start_date, training_data_end_date)
+				# self.load_census_data(),
+				# self.load_pop_dens_ccvi(),
+				# self.load_sg_patterns_monthly(training_data_start_date, training_data_end_date),
+				# # self.read_weather_data(training_data_start_date, training_data_end_date),
+				# self.load_sg_social_distancing(training_data_start_date, training_data_end_date),
+				# self.load_num_cases(training_data_start_date, training_data_end_date),
+				# self.load_dilation_index(training_data_start_date, training_data_end_date),
+				# self.load_reproduction_number(training_data_start_date, training_data_end_date),
+				# self.load_sg_mobility_incoming(training_data_start_date, training_data_end_date),
+				# self.load_countywise_cumulative_cases(training_data_start_date, training_data_end_date),
+				self.load_jsi_OxCGRT(training_data_start_date, training_data_end_date)
 			]
 
 			features = self.create_hypothetical_features(features)

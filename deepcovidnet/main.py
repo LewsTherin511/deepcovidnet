@@ -1,3 +1,6 @@
+import sys
+sys.path.append("/home/lews/PycharmProjects/covid_deepcovidnet")
+
 import deepcovidnet.config.global_config as global_config
 
 from deepcovidnet.CovidRunner import CovidRunner
